@@ -12,3 +12,70 @@
 #include <string>
 using namespace std;
 
+class Emp {
+    protected:
+    int id;
+    string name;
+
+    public:
+    Emp(int eId, string eName) {
+        id = eId;
+        name = eName;
+    }
+
+    virtual void display() {
+        cout << "ID: " << id << endl
+        << "Name: " << name << endl;
+    } 
+};
+
+class pEmp : public Emp {
+    float salary, bonus;
+
+    public:
+    pEmp(int eId, string eName, float eSalary, float eBonus) : Emp(eId, eName) {
+        salary = eSalary;
+        bonus = eBonus;
+    }
+
+    void display() {
+        cout << "\n -----Permanen Employee ----- \n";
+        cout << "Id: " << id << endl
+        << "Name: " << name << endl
+        << "Total salary: " << (salary + bonus) << endl;
+    }
+};
+
+class cEmp : public Emp {
+    float hours, rate;
+
+    public:
+    cEmp(int eId, string eName, float hrs, float r) : Emp(eId, eName) {
+        hours = hrs;
+        rate = r;        
+    }
+
+    void display() {
+        cout << "\n -----Contract Employee ----- \n";
+        cout << "ID: " << id << endl
+        << "Name: " << name << endl
+        << "Hours: " << hours << endl
+        << "Rate: " << rate << endl
+        << "Total salary: " << (hours * rate) << endl;
+    }
+};
+
+int main() {
+    pEmp P(101, "Arnav", 51414, 1542);
+    cEmp C(102, "Ronaldo", 9, 12154);
+
+    Emp* ptr;
+    
+    ptr = &P;
+    ptr -> display();
+
+    ptr = &C;
+    ptr -> display();
+
+    return 0;
+}
